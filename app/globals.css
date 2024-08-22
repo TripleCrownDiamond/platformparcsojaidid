@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.cl-formButtonPrimary {
+    font-size: 14px;
+    text-transform: none;
+    @apply bg-green-800;
+  }
+  
+  .cl-formButtonPrimary:hover,
+  .cl-formButtonPrimary:focus,
+  .cl-formButtonPrimary:active {
+    @apply bg-green-600;
+  }
