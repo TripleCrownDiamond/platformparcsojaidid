@@ -51,14 +51,14 @@ export default function NavBar() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     aria-current={item.current ? "page" : undefined}
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 hover:text-gray-900"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
                 {/* Lien "Ressources" qui redirige en fonction de l'état de connexion */}
                 <Link
