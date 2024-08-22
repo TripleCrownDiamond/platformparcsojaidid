@@ -21,7 +21,7 @@ const About = () => {
           niveau 2 (N2) implique une collaboration avec des organisations
           locales, des instituts de recherche et des ONG, qui contribuent à
           fournir des ressources adaptées et à partager leur expertise pour
-          soutenir les agriculteurs dans l'amélioration de leurs pratiques.
+          soutenir les agriculteurs dans l&#39;amélioration de leurs pratiques.
         </p>
         <Link
           href={userId ? "./dashboard" : "./sign-in"}
