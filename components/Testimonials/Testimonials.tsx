@@ -25,7 +25,7 @@ const Testimonials = () => {
     ];    
 
     // Fonction pour tronquer le témoignage à 150 caractères
-    const truncateTestimonial = (text, maxLength) => {
+    const truncateTestimonial = (text: string, maxLength: number): string => {
         if (text.length > maxLength) {
             return text.substring(0, maxLength) + '...';
         }
