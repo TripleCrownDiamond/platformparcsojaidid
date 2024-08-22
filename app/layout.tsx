@@ -12,8 +12,6 @@ const poppins = Poppins({
   weight: ["400", "600", "700", "900"],
 });
 
-export { inter, poppins };
-
 // Metadata for the app
 export const metadata: Metadata = {
   title: "Platform Soja",
