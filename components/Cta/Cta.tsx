@@ -35,12 +35,7 @@ export default function Cta() {
           >
             Commencez maintenant
           </Link>
-          <Link
-            href="./about"
-            className="text-sm font-semibold leading-6 text-green-800 hover:underline"
-          >
-            En savoir plus <span aria-hidden="true">→</span>
-          </Link>
+          
         </div>
       </div>
     </div>
