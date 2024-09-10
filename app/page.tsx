@@ -7,13 +7,15 @@ import About from "@/components/About/About";
 
 export default function Home() {
   return (
-    <div>
-      <Hero />
-      <About />
-      <Features />
-      <Cta />
-      <Testimonials />
-      <Contact />
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">
+        <Hero />
+        <About />
+        <Features />
+        <Cta />
+        <Testimonials />
+        <Contact />
+      </main>
     </div>
   );
 }

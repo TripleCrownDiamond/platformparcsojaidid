@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const getUserData = async (userId) => {
   if (!userId) return null;
 
@@ -22,7 +20,7 @@ export const getUserData = async (userId) => {
 };
 
 export const updateUserData = async (userId, updatedData) => {
-    console.log(updatedData);
+   
     try {
         const response = await fetch(`http://localhost:1337/api/clerk-users/${userId}`, {
             method: 'PUT',

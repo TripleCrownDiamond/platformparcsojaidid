@@ -15,8 +15,8 @@ import { auth } from "@clerk/nextjs/server";
 
 const navigation = [
   { name: "Accueil", href: "./", current: true },
-  { name: "A-propos", href: "#about", current: true },
-  { name: "Contact", href: "#contact", current: false },
+  { name: "A-propos", href: "./#about", current: true },
+  { name: "Contact", href: "./#contact", current: false },
 ];
 
 export default function NavBar() {

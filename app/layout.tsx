@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
 // Fonts configuration
-const inter = Inter({ subsets: ["latin"],  weight: ["400", "600", "700", "900"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700", "900"] });
 
 // Metadata for the app
 export const metadata: Metadata = {
@@ -26,11 +26,13 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={frFR} signInFallbackRedirectUrl="/dashboard" signUpFallbackRedirectUrl="/dashboard">
       <html lang="fr">
-        <body className={`${inter.className}`}>
-          <ToastContainer />
-          <NavBar />
-          {children}
+        <body className={`${inter.className} flex flex-col min-h-screen`}>
+          <div className="flex-grow">
+            <NavBar />
+            <main>{children}</main>
+          </div>
           <Footer />
+          <ToastContainer />
         </body>
       </html>
     </ClerkProvider>

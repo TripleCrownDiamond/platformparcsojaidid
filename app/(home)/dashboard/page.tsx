@@ -2,7 +2,7 @@ import DashboardComponent from "@/components/DashboardComponent/DashboardCompone
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen p-4">
       <DashboardComponent />
     </div>
   );

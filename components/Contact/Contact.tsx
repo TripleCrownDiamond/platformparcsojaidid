@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Contact = () => {
   return (
-    <div id='contact' className='w-full mt-20 flex flex-col justify-center items-center bg-green-100 p-5 md:p-24'>
+    <div id='contact' className='w-full mt-20 flex flex-col justify-center items-center bg-green-100 p-5 md:p-24 mb-28'>
         <Image src='/img/mail.png' alt='' width={250} height={100} />
         <h1 className='mt-2 text-3xl font-bold tracking-tight text-green-900 sm:text-4xl'>
             Contactez nous
