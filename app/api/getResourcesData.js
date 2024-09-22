@@ -1,11 +1,11 @@
-// api.js
-
-const API_BASE_URL = "http://localhost:1337/api";
+const baseUrl = "http://localhost:1337";
 
 // Fonction pour récupérer une ressource par ID
-export const fetchResourceById = async (id) => {
+export const getResourceById = async (resourceId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/resources/${id}?populate=*`);
+    const response = await fetch(`${baseUrl}/resources/${resourceId}?populate=*`, {
+      next: { revalidate: 10 }, // Ajout de la configuration pour éviter le problème de composant côté serveur
+    });
 
     if (!response.ok) {
       throw new Error("Erreur lors de la récupération de la ressource.");
@@ -22,7 +22,9 @@ export const fetchResourceById = async (id) => {
 // Fonction pour récupérer toutes les ressources
 export const fetchAllResources = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/resources?populate=*&sort=createdAt:desc`);
+    const response = await fetch(`${baseUrl}/resources?populate=*&sort=createdAt:desc`, {
+      next: { revalidate: 10 }, // Ajout de la configuration pour éviter le problème de composant côté serveur
+    });
 
     if (!response.ok) {
       throw new Error("Erreur lors de la récupération des ressources.");

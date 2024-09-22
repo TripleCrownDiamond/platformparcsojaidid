@@ -1,9 +1,11 @@
+const baseUrl = "http://localhost:1337";
+
 export const getUserData = async (userId) => {
   if (!userId) return null;
 
   try {
     const response = await fetch(
-      `http://localhost:1337/api/clerk-users?filters[slug][$eq]=${userId}`
+      `${baseUrl}/api/clerk-users?filters[slug][$eq]=${userId}`
     );
     const data = await response.json();
 
@@ -20,29 +22,26 @@ export const getUserData = async (userId) => {
 };
 
 export const updateUserData = async (userId, updatedData) => {
-   
-    try {
-        const response = await fetch(`http://localhost:1337/api/clerk-users/${userId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                data: updatedData
-            }),
-        });
+  try {
+    const response = await fetch(`${baseUrl}/api/clerk-users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: updatedData
+      }),
+    });
 
-        if (!response.ok) {
-            throw new Error('Erreur lors de la mise à jour des données.');
-        }
-
-        const data = await response.json();
-        return data;
-
-    } catch (error) {
-        console.error(error);
-        throw new Error('Erreur lors de la mise à jour des données.');
+    if (!response.ok) {
+      throw new Error('Erreur lors de la mise à jour des données.');
     }
-};
 
-  
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error(error);
+    throw new Error('Erreur lors de la mise à jour des données.');
+  }
+};

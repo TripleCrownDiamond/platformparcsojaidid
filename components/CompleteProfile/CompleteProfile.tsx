@@ -6,6 +6,17 @@ import { FaTimes } from "react-icons/fa";
 import { getUserData, updateUserData } from "@/app/api/getUserDatas";
 import { toast } from "react-toastify";
 
+// Type pour les données utilisateur
+interface UserData {
+  id: string;
+  attributes: {
+    sex?: "male" | "female";
+    birthdate?: string;
+    profession?: string;
+    organization_name?: string;
+  };
+}
+
 interface CompleteProfileProps {
   setOpenCompleteProfile: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -14,7 +25,7 @@ const CompleteProfile: React.FC<CompleteProfileProps> = ({
   setOpenCompleteProfile,
 }) => {
   const { user } = useUser();
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [selectedSex, setSelectedSex] = useState<string>("");
   const [birthdate, setBirthdate] = useState<string>("");
   const [selectedProfession, setSelectedProfession] = useState<string>("");
@@ -33,12 +44,14 @@ const CompleteProfile: React.FC<CompleteProfileProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUserData(user?.id);
-      setUserData(data);
-      setSelectedSex(data.attributes?.sex || "");
-      setBirthdate(data.attributes?.birthdate || "");
-      setSelectedProfession(data.attributes?.profession || "");
-      setOrganizationName(data.attributes?.organization_name || "");
+      if (user?.id) {
+        const data = await getUserData(user.id);
+        setUserData(data);
+        setSelectedSex(data.attributes?.sex || "");
+        setBirthdate(data.attributes?.birthdate || "");
+        setSelectedProfession(data.attributes?.profession || "");
+        setOrganizationName(data.attributes?.organization_name || "");
+      }
     };
 
     fetchData();
@@ -69,26 +82,28 @@ const CompleteProfile: React.FC<CompleteProfileProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      await updateUserData(userData.id, {
-        sex: selectedSex,
-        birthdate,
-        profession: selectedProfession,
-        organization_name: organizationName,
-      });
+    if (userData?.id) {
+      try {
+        await updateUserData(userData.id, {
+          sex: selectedSex,
+          birthdate,
+          profession: selectedProfession,
+          organization_name: organizationName,
+        });
 
-      // Réinitialiser les champs après une mise à jour réussie
-      setSelectedSex("");
-      setBirthdate("");
-      setSelectedProfession("");
-      setOrganizationName("");
+        // Réinitialiser les champs après une mise à jour réussie
+        setSelectedSex("");
+        setBirthdate("");
+        setSelectedProfession("");
+        setOrganizationName("");
 
-      const updatedData = await getUserData(user?.id);
-      setUserData(updatedData);
+        const updatedData = await getUserData(user?.id);
+        setUserData(updatedData);
 
-      toast.success("Les informations ont été mises à jour avec succès !");
-    } catch (error) {
-      toast.error("Une erreur est survenue lors de la mise à jour.");
+        toast.success("Les informations ont été mises à jour avec succès !");
+      } catch (error) {
+        toast.error("Une erreur est survenue lors de la mise à jour.");
+      }
     }
   };
 
