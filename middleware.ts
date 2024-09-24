@@ -1,14 +1,23 @@
-import { clerkMiddleware, createRouteMatcher  } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtectedRoute = createRouteMatcher(['/dashboard(.*)'])
+// Définir le matcher pour les routes protégées
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
 
-export default clerkMiddleware();
+export default clerkMiddleware({
+  publicRoutes: ['/'], // Définir des routes publiques si nécessaire
+  afterAuth: (req) => {
+    // Si l'utilisateur n'est pas authentifié et qu'il essaie d'accéder à une route protégée
+    if (!req.auth.userId && isProtectedRoute(req.nextUrl.pathname)) {
+      return NextResponse.redirect(new URL('/sign-in', req.url)); // Redirection vers la page de connexion
+    }
+  },
+});
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
+    // Ignorer les fichiers internes de Next.js et tous les fichiers statiques
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
+    // Toujours s'exécuter pour les routes API
     '/(api|trpc)(.*)',
   ],
 };
