@@ -1,6 +1,6 @@
 import React from "react";
-import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { userId } from "@/constants";
 
 const Footer = () => {
   const navigation = [
@@ -8,8 +8,6 @@ const Footer = () => {
     { name: "A-propos", href: "#about", current: true },
     { name: "Contact", href: "#contact", current: false },
   ];
-
-  const userId = auth();
 
   return (
     <footer className="w-full z-50 fixed bottom-0 bg-slate-50">

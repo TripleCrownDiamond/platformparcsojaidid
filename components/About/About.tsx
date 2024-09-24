@@ -6,8 +6,6 @@ import { userId } from "@/constants/";
 
 const About = async () => {
   const { data } = await getHeroAboutCtaDatas("/api/about-section?populate=*");
-  
-
 
   // Valeurs par défaut
   const defaultTitle = "A-propos de cette plateforme";

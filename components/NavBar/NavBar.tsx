@@ -8,10 +8,9 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import Link from "next/link";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+import { userId } from "@/constants";
 
 const navigation = [
   { name: "Accueil", href: "./", current: true },
@@ -20,8 +19,6 @@ const navigation = [
 ];
 
 export default function NavBar() {
-
-  const { userId } = auth();
 
   return (
     <Disclosure as="nav" className="bg-gray-100 z-50">

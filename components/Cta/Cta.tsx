@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { getHeroAboutCtaDatas } from "@/app/api/getHeroAboutCtaDatas";
+import { userId } from "@/constants";
 
 export default async function Cta() {
-  const { userId } = auth();
+  
   const { data } = await getHeroAboutCtaDatas("/api/cta-section?populate=*");
 
   // Valeurs par défaut

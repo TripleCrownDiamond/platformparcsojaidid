@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getHeroAboutCtaDatas } from "@/app/api/getHeroAboutCtaDatas";
-import { auth } from "@clerk/nextjs/server";
+import { userId } from "@/constants";
 
 /**
  * Composant Hero.
  * @returns {JSX.Element} - Composant Hero avec les données de l'API.
  */
 const Hero = async () => {
-  const { userId } = auth();
+  
   // Valeurs par défaut
   const defaultTitle =
     "Explorez des Ressources Inestimables pour la culture du Soja.";
