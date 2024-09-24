@@ -14,7 +14,7 @@ export const getImageUrl = (image) => {
 
     for (const format of imageFormats) {
       if (formats[format]) {
-        return `${baseUrl}${formats[format].url}`;
+        return `${formats[format].url}`;
       }
     }
 
