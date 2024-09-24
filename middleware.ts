@@ -3,15 +3,9 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // Définir le matcher pour les routes protégées
 const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
 
-export default clerkMiddleware({
-  publicRoutes: ['/'], // Définir des routes publiques si nécessaire
-  afterAuth: (req) => {
-    // Si l'utilisateur n'est pas authentifié et qu'il essaie d'accéder à une route protégée
-    if (!req.auth.userId && isProtectedRoute(req.nextUrl.pathname)) {
-      return NextResponse.redirect(new URL('/sign-in', req.url)); // Redirection vers la page de connexion
-    }
-  },
-});
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) auth().protect()
+})
 
 export const config = {
   matcher: [
