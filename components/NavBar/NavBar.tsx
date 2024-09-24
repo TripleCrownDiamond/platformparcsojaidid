@@ -15,13 +15,13 @@ import { auth } from "@clerk/nextjs/server";
 
 const navigation = [
   { name: "Accueil", href: "./", current: true },
-  { name: "A-propos", href: "#about", current: true },
-  { name: "Contact", href: "#contact", current: false },
+  { name: "A-propos", href: "./#about", current: true },
+  { name: "Contact", href: "./#contact", current: false },
 ];
 
 export default function NavBar() {
 
-  const {userId} = auth();
+  const { userId } = auth();
 
   return (
     <Disclosure as="nav" className="bg-gray-100 z-50">
@@ -74,7 +74,7 @@ export default function NavBar() {
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <SignedOut>
               <Link href="/sign-in">
-                <button className="rounded-md bg-green-900 px-3 py-2 text-sm font-medium text-white hover:bg-green-600">
+                <button className="rounded-md bg-green-800 px-3 py-2 text-sm font-medium text-white hover:bg-green-600">
                   Se connecter
                 </button>
               </Link>

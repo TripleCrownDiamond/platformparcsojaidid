@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { frFR } from "@clerk/localizations";
 import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 // Fonts configuration
-const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
-});
+const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700", "900"] });
 
 // Metadata for the app
 export const metadata: Metadata = {
@@ -25,11 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider localization={frFR}>
+    <ClerkProvider localization={frFR} signInFallbackRedirectUrl="/dashboard" signUpFallbackRedirectUrl="/dashboard">
       <html lang="fr">
-        <body className={`${inter.className} ${poppins.className}`}>
-          <NavBar />
-          {children}
+        <body className={`${inter.className} flex flex-col min-h-screen`}>
+          <div className="flex-grow">
+            <NavBar />
+            <main>{children}</main>
+          </div>
+          <Footer />
+          <ToastContainer />
         </body>
       </html>
     </ClerkProvider>
