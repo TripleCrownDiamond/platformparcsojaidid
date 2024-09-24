@@ -28,7 +28,7 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
       try {
         setLoadingResources(true);
         const response = await fetch(
-          "http://localhost:1337/api/resources?populate=*&sort=createdAt:desc"
+          "https://efficient-apparel-56013b6060.strapiapp.com/api/resources?populate=*&sort=createdAt:desc"
         );
 
         if (!response.ok) {
@@ -122,7 +122,7 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
                 <Image
                   src={
                     imageUrl
-                      ? `http://localhost:1337${imageUrl}`
+                      ? `https://efficient-apparel-56013b6060.strapiapp.com${imageUrl}`
                       : "/img/placeholder.webp"
                   }
                   alt={resource.attributes.title}

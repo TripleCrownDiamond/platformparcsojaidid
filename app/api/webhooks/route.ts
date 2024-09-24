@@ -65,7 +65,7 @@ export async function POST(req: Request) {
 
   // Envoyer les données à l'API externe
   try {
-    const response = await fetch("http://localhost:1337/api/clerk-users", {
+    const response = await fetch("https://efficient-apparel-56013b6060.strapiapp.com/api/clerk-users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

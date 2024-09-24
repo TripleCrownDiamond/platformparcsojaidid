@@ -15,7 +15,7 @@ interface ResourceDetailsProps {
 }
 
 const ResourceDetails: React.FC<ResourceDetailsProps> = ({ resourceId }) => {
-  const baseUrl = 'http://localhost:1337'; // Base URL for your files
+  const baseUrl = 'https://efficient-apparel-56013b6060.strapiapp.com'; // Base URL for your files
   const [resourceData, setResourceData] = useState<Resource | null>(null);
   const [loadingResource, setLoadingResource] = useState<boolean>(true);
   const [errorResource, setErrorResource] = useState<string | null>(null);
@@ -26,7 +26,7 @@ const ResourceDetails: React.FC<ResourceDetailsProps> = ({ resourceId }) => {
         setLoadingResource(true);
 
         const response = await fetch(
-          `http://localhost:1337/api/resources/${resourceId}?populate=*`
+          `https://efficient-apparel-56013b6060.strapiapp.com/api/resources/${resourceId}?populate=*`
         );
 
         if (!response.ok) {
