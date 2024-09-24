@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner"; // Assurez-vous de bien importer ce composant
 
-const AuthGuard = ({ children }) => {
+interface AuthGuardProps {
+  children: ReactNode;
+}
+
+const AuthGuard = ({ children }: AuthGuardProps) => {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useUser();
 
@@ -19,7 +23,7 @@ const AuthGuard = ({ children }) => {
     return <LoadingSpinner />;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default AuthGuard;
