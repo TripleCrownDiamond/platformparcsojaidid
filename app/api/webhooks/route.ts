@@ -51,34 +51,42 @@ export async function POST(req: Request) {
     });
   }
 
-  const userData: UserJSON = evt.data;
+  // Vérifiez si l'événement est lié à un utilisateur via son type d'événement
+  if (evt.type === "user.created" || evt.type === "user.updated") {
+    const userData = evt.data as UserJSON;
 
-  const extractedData = {
-    "data":  {
+    const extractedData = {
+      data: {
         slug: userData.id,
         email: userData.email_addresses[0]?.email_address || "",
         first_name: userData.first_name || "",
         last_name: userData.last_name || "",
         profile_image_url: userData.profile_image_url || "",
-      }
-  };
-
-  // Envoyer les données à l'API externe
-  try {
-    const response = await fetch("https://efficient-apparel-56013b6060.strapiapp.com/api/clerk-users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(extractedData),
-    });
+    };
 
-    const responseData = await response.json();
-    console.log("Response from server:", responseData);
+    // Envoyer les données à l'API externe
+    try {
+      const response = await fetch(
+        "https://efficient-apparel-56013b6060.strapiapp.com/api/clerk-users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(extractedData),
+        }
+      );
 
-    return new Response("", { status: 200 });
-  } catch (error) {
-    console.error("Error sending data to external API:", error);
-    return new Response("Error occured while sending data", { status: 500 });
+      const responseData = await response.json();
+      console.log("Response from server:", responseData);
+
+      return new Response("", { status: 200 });
+    } catch (error) {
+      console.error("Error sending data to external API:", error);
+      return new Response("Error occured while sending data", { status: 500 });
+    }
+  } else {
+    return new Response("Event is not related to user creation or update", { status: 400 });
   }
 }
