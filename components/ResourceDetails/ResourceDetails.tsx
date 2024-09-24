@@ -84,7 +84,7 @@ const ResourceDetails: React.FC<ResourceDetailsProps> = ({ resourceId }) => {
                     <Image
                       src={
                         imageUrl
-                          ? `${baseUrl}${imageUrl}`
+                          ? `${imageUrl}`
                           : "/img/placeholder.webp"
                       }
                       alt={

@@ -122,7 +122,7 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
                 <Image
                   src={
                     imageUrl
-                      ? `https://efficient-apparel-56013b6060.strapiapp.com${imageUrl}`
+                      ? `${imageUrl}`
                       : "/img/placeholder.webp"
                   }
                   alt={resource.attributes.title}
