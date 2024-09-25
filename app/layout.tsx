@@ -36,8 +36,8 @@ export default function RootLayout({
     <ClerkProvider localization={frFR} signInFallbackRedirectUrl="/dashboard" signUpFallbackRedirectUrl="/dashboard">
       <html lang="fr">
         <head>
-          <title>{metadata.title}</title>
-          <meta name="description" content={metadata.description} />
+          <title>{typeof metadata.title === 'string' ? metadata.title : "Titre par défaut"}</title>
+          <meta name="description" content={typeof metadata.description === 'string' ? metadata.description : "Description par défaut"} />
           {/* Ajoute d'autres balises meta si nécessaire */}
         </head>
         <body className={`${inter.className} flex flex-col min-h-screen`}>
