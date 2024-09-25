@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { userId } from "@/constants";
 
-const Footer = () => {
+const Footer = ({ userId }: { userId: string | null }) => {
   const navigation = [
     { name: "Accueil", href: "./", current: true },
     { name: "A-propos", href: "#about", current: true },

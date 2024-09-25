@@ -1,11 +1,31 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getHeroAboutCtaDatas } from "@/app/api/getHeroAboutCtaDatas";
-import { userId } from "@/constants";
 
 export default async function Cta() {
   
   const { data } = await getHeroAboutCtaDatas("/api/cta-section?populate=*");
+
+   // Déterminer si nous sommes côté serveur ou client
+   const isServer = typeof window === "undefined";
+
+   // Construire l'URL en fonction de l'environnement
+   const baseUrl = isServer
+     ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" // Assure-toi que cette variable d'environnement est bien définie
+     : "";
+ 
+   // Appel à l'API pour obtenir userId avec une URL absolue côté serveur
+   const response = await fetch(`${baseUrl}/api/routes/getUserId`, {
+     method: "GET",
+     credentials: "include",
+   });
+ 
+   let userId: string | null = null;
+ 
+   if (response.ok) {
+     const data = await response.json();
+     userId = data.userId;
+   }
 
   // Valeurs par défaut
   const defaultTitle =

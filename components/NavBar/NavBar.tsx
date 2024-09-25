@@ -1,3 +1,4 @@
+// NavBar.tsx
 import {
   Disclosure,
   DisclosureButton,
@@ -7,10 +8,9 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { userId } from "@/constants";
 
 const navigation = [
   { name: "Accueil", href: "./", current: true },
@@ -18,14 +18,17 @@ const navigation = [
   { name: "Contact", href: "./#contact", current: false },
 ];
 
-export default function NavBar() {
+interface NavBarProps {
+  userId: string | null; // Définir le type de la prop userId
+}
+
+export default function NavBar({ userId }: NavBarProps) { // Accepter la prop ici
 
   return (
     <Disclosure as="nav" className="bg-gray-100 z-50">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Bouton menu mobile */}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-800 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Ouvrir le menu principal</span>
@@ -78,7 +81,6 @@ export default function NavBar() {
             </SignedOut>
 
             <SignedIn>
-              {/* Dropdown Profil */}
               <Menu as="div" className="relative ml-3">
                 <div>
                   <MenuButton className="relative flex rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:ring-offset-gray-100">
@@ -106,7 +108,6 @@ export default function NavBar() {
               {item.name}
             </DisclosureButton>
           ))}
-          {/* Lien "Ressources" dans le menu mobile */}
           <DisclosureButton
             as="a"
             href={userId ? "/dashboard" : "/sign-in"}

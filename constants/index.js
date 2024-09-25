@@ -1,7 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
 import imageFormats from "./imageFormats";
-
-export const { userId } = auth();
 
 export const baseUrl = "https://efficient-apparel-56013b6060.strapiapp.com";
 
