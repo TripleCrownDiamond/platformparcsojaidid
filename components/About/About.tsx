@@ -11,7 +11,7 @@ const About = async () => {
 
   // Construire l'URL en fonction de l'environnement
   const baseUrl = isServer
-    ? process.env.NEXT_PUBLIC_BASE_URL || "http://platformparcsojaidid.vercel.app" // Assure-toi que cette variable d'environnement est bien définie
+    ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" // Assure-toi que cette variable d'environnement est bien définie
     : "";
 
   // Appel à l'API pour obtenir userId avec une URL absolue côté serveur
