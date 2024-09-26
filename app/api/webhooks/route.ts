@@ -65,6 +65,8 @@ export async function POST(req: Request) {
       },
     };
 
+    console.log(userData)
+
     // Envoyer les données à l'API externe
     try {
       const response = await fetch(
