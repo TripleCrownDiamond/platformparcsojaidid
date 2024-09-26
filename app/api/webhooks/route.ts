@@ -12,12 +12,13 @@ interface UserJSON {
 }
 
 export async function POST(req: Request) {
+  console.log("Webhook received");
+  
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
-
+  
   if (!WEBHOOK_SECRET) {
-    throw new Error(
-      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
-    );
+    console.error("WEBHOOK_SECRET is not set");
+    throw new Error("Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local");
   }
 
   const headerPayload = headers();
@@ -25,14 +26,23 @@ export async function POST(req: Request) {
   const svix_timestamp = headerPayload.get("svix-timestamp");
   const svix_signature = headerPayload.get("svix-signature");
 
+  console.log("Headers received:", {
+    svix_id,
+    svix_timestamp,
+    svix_signature
+  });
+
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response("Error occured -- no svix headers", {
+    console.error("Missing svix headers");
+    return new Response("Error occurred -- no svix headers", {
       status: 400,
     });
   }
 
   const payload = await req.json();
   const body = JSON.stringify(payload);
+
+  console.log("Payload received:", body);
 
   const wh = new Webhook(WEBHOOK_SECRET);
 
@@ -44,9 +54,11 @@ export async function POST(req: Request) {
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
     }) as WebhookEvent;
+
+    console.log("Webhook verification succeeded:", evt);
   } catch (err) {
     console.error("Error verifying webhook:", err);
-    return new Response("Error occured", {
+    return new Response("Error occurred", {
       status: 400,
     });
   }
@@ -65,10 +77,11 @@ export async function POST(req: Request) {
       },
     };
 
-    console.log(userData)
+    console.log("Extracted user data:", extractedData);
 
     // Envoyer les données à l'API externe
     try {
+      console.log("Sending data to external API...");
       const response = await fetch(
         "https://efficient-apparel-56013b6060.strapiapp.com/api/clerk-users",
         {
@@ -81,14 +94,16 @@ export async function POST(req: Request) {
       );
 
       const responseData = await response.json();
-      console.log("Response from server:", responseData);
+      
+      console.log("Response from external API:", responseData);
 
       return new Response("", { status: 200 });
     } catch (error) {
       console.error("Error sending data to external API:", error);
-      return new Response("Error occured while sending data", { status: 500 });
+      return new Response("Error occurred while sending data", { status: 500 });
     }
   } else {
+    console.log("Event type not related to user creation or update:", evt.type);
     return new Response("Event is not related to user creation or update", { status: 400 });
   }
 }
