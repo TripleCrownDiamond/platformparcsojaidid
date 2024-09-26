@@ -6,31 +6,10 @@ import { getHeroAboutCtaDatas } from "@/app/api/getHeroAboutCtaDatas";
 const About = async () => {
   const { data } = await getHeroAboutCtaDatas("/api/about-section?populate=*");
 
-  // Déterminer si nous sommes côté serveur ou client
-  const isServer = typeof window === "undefined";
-
-  // Construire l'URL en fonction de l'environnement
-  const baseUrl = isServer
-    ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" // Assure-toi que cette variable d'environnement est bien définie
-    : "";
-
-  // Appel à l'API pour obtenir userId avec une URL absolue côté serveur
-  const response = await fetch(`${baseUrl}/api/routes/getUserId`, {
-    method: "GET",
-    credentials: "include",
-  });
-
-  let userId: string | null = null;
-
-  if (response.ok) {
-    const data = await response.json();
-    userId = data.userId;
-  }
-
   // Valeurs par défaut
-  const defaultTitle = "A-propos de cette plateforme";
+  const defaultTitle = "À propos de cette plateforme";
   const defaultDescription =
-    "Cette plateforme de ressources éducatives pour le soja est conçue pour fournir aux agriculteurs des informations clés sur la culture du soja, allant des bonnes pratiques aux techniques avancées. Le partenariat de niveau 2 (N2) implique une collaboration avec des organisations locales, des instituts de recherche et des ONG, qui contribuent à fournir des ressources adaptées et à partager leur expertise pour soutenir les agriculteurs dans l'amélioration de leurs pratiques.";
+    "Cette plateforme de ressources éducatives pour le soja est conçue pour fournir aux agriculteurs des informations clés sur la culture du soja...";
   const defaultImageUrl = "/img/laptop.png";
   const defaultCtaText = "Commencez maintenant";
 
@@ -64,7 +43,7 @@ const About = async () => {
           {description}
         </p>
         <Link
-          href={userId ? "./dashboard" : "./sign-in"}
+          href={"./dashboard"}
           className="rounded-md bg-green-800 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 transition duration-300"
         >
           {cta_text}

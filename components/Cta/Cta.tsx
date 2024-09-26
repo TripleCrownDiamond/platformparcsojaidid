@@ -6,27 +6,6 @@ export default async function Cta() {
   
   const { data } = await getHeroAboutCtaDatas("/api/cta-section?populate=*");
 
-   // Déterminer si nous sommes côté serveur ou client
-   const isServer = typeof window === "undefined";
-
-   // Construire l'URL en fonction de l'environnement
-   const baseUrl = isServer
-     ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000" // Assure-toi que cette variable d'environnement est bien définie
-     : "";
- 
-   // Appel à l'API pour obtenir userId avec une URL absolue côté serveur
-   const response = await fetch(`${baseUrl}/api/routes/getUserId`, {
-     method: "GET",
-     credentials: "include",
-   });
- 
-   let userId: string | null = null;
- 
-   if (response.ok) {
-     const data = await response.json();
-     userId = data.userId;
-   }
-
   // Valeurs par défaut
   const defaultTitle =
     "Optimisez vos pratiques agricoles. Découvrez des ressources éducatives illimitées.";
@@ -64,7 +43,7 @@ export default async function Cta() {
         </p>
         <div className="mt-8 flex flex-col items-start md:items-center gap-4">
           <Link
-            href={userId ? "./dashboard" : "./sign-in"}
+            href={"./dashboard"}
             className="rounded-md bg-green-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 transition duration-300"
           >
             {cta_text}

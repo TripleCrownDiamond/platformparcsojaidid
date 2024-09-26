@@ -5,7 +5,7 @@ import Testimonials from "@/components/Testimonials/Testimonials";
 import Contact from "@/components/Contact/Contact";
 import About from "@/components/About/About";
 
-export default function Home() {
+const Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
@@ -18,4 +18,6 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+
+export default Home;
