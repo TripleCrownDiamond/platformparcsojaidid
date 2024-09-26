@@ -1,7 +1,7 @@
 export const getUserId = async () => {
   const isServer = typeof window === "undefined";
   const baseUrl = isServer
-    ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+    ? process.env.NEXT_PUBLIC_BASE_URL || "https://platformparcsojaidid.vercel.app"
     : window.location.origin; // Utilise window.location.origin côté client
 
   const response = await fetch(`${baseUrl}/api/routes/getUserId`, {
