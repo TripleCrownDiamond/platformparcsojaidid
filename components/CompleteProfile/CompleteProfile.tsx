@@ -81,31 +81,27 @@ const CompleteProfile: React.FC<CompleteProfileProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (userData?.id) {
       try {
-        await updateUserData(userData.id, {
+        const updatedData = {
           sex: selectedSex,
           birthdate,
           profession: selectedProfession,
           organization_name: organizationName,
-        });
-
-        // Réinitialiser les champs après une mise à jour réussie
-        setSelectedSex("");
-        setBirthdate("");
-        setSelectedProfession("");
-        setOrganizationName("");
-
-        const updatedData = await getUserData(user?.id);
-        setUserData(updatedData);
-
+        };
+  
+        console.log("Données envoyées :", updatedData);
+  
+        await updateUserData(userData.id, updatedData);
+  
         toast.success("Les informations ont été mises à jour avec succès !");
       } catch (error) {
         toast.error("Une erreur est survenue lors de la mise à jour.");
       }
     }
   };
+  
 
   return (
     <div className="w-full py-5 flex flex-col relative mb-96">

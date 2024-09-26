@@ -29,7 +29,7 @@ export const updateUserData = async (userId, updatedData) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: updatedData
+        data: updatedData // Ceci devrait bien correspondre à la structure attendue par Strapi
       }),
     });
 
