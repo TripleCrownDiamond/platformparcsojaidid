@@ -164,7 +164,7 @@ const ResourceDetails: React.FC<ResourceDetailsProps> = ({ resourceId }) => {
                 {resourceData.attributes.files.data.map((file) => (
                   <li key={file.id} className="mt-1">
                     <a
-                      href={`${baseUrl}${file.attributes.url}`} // Construct the full URL
+                      href={`${file.attributes.url}`} // Construct the full URL
                       download
                       className="text-blue-500 underline"
                     >
