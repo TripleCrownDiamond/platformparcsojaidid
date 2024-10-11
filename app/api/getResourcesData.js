@@ -22,9 +22,9 @@ export const getResourceById = async (resourceId) => {
 // Fonction pour récupérer toutes les ressources
 export const fetchAllResources = async () => {
   try {
-    const response = await fetch(`${baseUrl}/resources?populate=*&sort=createdAt:desc`, {
+    const response = await fetch(`${baseUrl}/resources?populate=*&sort=createdAt:asc`, {
       next: { revalidate: 10 }, // Ajout de la configuration pour éviter le problème de composant côté serveur
-    });
+    });    
 
     if (!response.ok) {
       throw new Error("Erreur lors de la récupération des ressources.");

@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     try {
       console.log("Sending data to external API...");
       const response = await fetch(
-        "https://efficient-apparel-56013b6060.strapiapp.com/api/clerk-users",
+        "https://smart-baseball-ed4db8eac7.strapiapp.com/api/clerk-users",
         {
           method: "POST",
           headers: {

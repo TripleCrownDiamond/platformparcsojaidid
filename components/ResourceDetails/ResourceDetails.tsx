@@ -26,7 +26,7 @@ const ResourceDetails: React.FC<ResourceDetailsProps> = ({ resourceId }) => {
         setLoadingResource(true);
 
         const response = await fetch(
-          `https://efficient-apparel-56013b6060.strapiapp.com/api/resources/${resourceId}?populate=*`
+          `https://smart-baseball-ed4db8eac7.strapiapp.com/api/resources/${resourceId}?populate=*`
         );
 
         if (!response.ok) {
