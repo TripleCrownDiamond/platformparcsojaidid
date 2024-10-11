@@ -1,6 +1,6 @@
 import imageFormats from "./imageFormats";
 
-export const baseUrl = "https://efficient-apparel-56013b6060.strapiapp.com";
+export const baseUrl = "https://smart-baseball-ed4db8eac7.strapiapp.com";
 
 // Fonction pour obtenir l'URL de l'image selon les formats disponibles
 export const getImageUrl = (image) => {

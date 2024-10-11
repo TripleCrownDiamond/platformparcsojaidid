@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = ({ userId }: { userId: string | null }) => {
   const navigation = [
@@ -32,7 +33,12 @@ const Footer = ({ userId }: { userId: string | null }) => {
         </div>
         <div className="flex justify-center items-center mb-4">
           <Link href="./">
-            <h1 className="text-base font-black">LOGO</h1>
+          <Image
+                src="/img/logo.png"
+                alt="Logo"
+                width={60}
+                height={60}
+                />
           </Link>
         </div>
         <div className="flex justify-center items-center p-2 bg-green-100">

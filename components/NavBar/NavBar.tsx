@@ -8,6 +8,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Image from "next/image";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const navigation = [
@@ -43,7 +44,13 @@ export default function NavBar({ userId }: NavBarProps) { // Accepter la prop ic
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <Link href="./">
-                <h1 className="text-base font-black">LOGO</h1>
+                <Image
+                src="/img/logo.png"
+                alt="Logo"
+                width={60}
+                height={60}
+                />
+              
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:block">
