@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'efficient-apparel-56013b6060.media.strapiapp.com',
+        hostname: 'smart-baseball-ed4db8eac7.media.strapiapp.com',
         pathname: '/**',  // Autorise tous les chemins sous ce domaine
       },
     ],

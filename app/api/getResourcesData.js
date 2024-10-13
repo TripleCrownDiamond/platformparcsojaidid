@@ -1,4 +1,4 @@
-const baseUrl = "https://efficient-apparel-56013b6060.strapiapp.com";
+const baseUrl = "https://smart-baseball-ed4db8eac7.strapiapp.com";
 
 // Fonction pour récupérer une ressource par ID
 export const getResourceById = async (resourceId) => {

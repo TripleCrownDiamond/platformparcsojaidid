@@ -1,4 +1,4 @@
-const baseUrl = "https://efficient-apparel-56013b6060.strapiapp.com";
+const baseUrl = "https://smart-baseball-ed4db8eac7.strapiapp.com";
 
 export const getUserData = async (userId) => {
   if (!userId) return null;
