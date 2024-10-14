@@ -6,9 +6,22 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/fr";
 import Image from "next/image";
 import { Resource, ApiResponse } from "@/constants/type";
+import { getUserData } from "@/app/api/getUserDatas";
 
 dayjs.extend(relativeTime);
 dayjs.locale("fr");
+
+interface UserData {
+  id: string;
+  attributes: {
+    sex?: "male" | "female";
+    commune?: string;
+    arrondissement?: string;
+    village?: string;
+    animateur?: string;
+    active?: boolean;
+  };
+}
 
 interface ResourcesProps {
   setOpenResources: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,12 +29,25 @@ interface ResourcesProps {
 
 const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
   const { user } = useUser();
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [resourcesData, setResourcesData] = useState<Resource[]>([]);
   const [displayedData, setDisplayedData] = useState<Resource[]>([]);
   const [loadingResources, setLoadingResources] = useState<boolean>(true);
   const [errorResources, setErrorResources] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
   const [resourcesPerPage] = useState<number>(8);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user?.id) {
+        const data = await getUserData(user.id);
+        setUserData(data);
+        console.log("Contenu de userData:", data.attributes?.active);
+      }
+    };
+
+    fetchData();
+  }, [user?.id]);
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -77,8 +103,7 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
 
   const handleNextPage = () => {
     if (
-      (page - 1) * resourcesPerPage + resourcesPerPage <
-      resourcesData.length
+      (page - 1) * resourcesPerPage + resourcesPerPage < resourcesData.length
     ) {
       setPage(page + 1);
     }
@@ -89,6 +114,22 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
       setPage(page - 1);
     }
   };
+
+  if (userData?.attributes?.active === false) {
+    return (
+      <div className="w-full py-5 flex flex-col relative mb-96 bg-white">
+        <button
+          onClick={handleClose}
+          className="absolute top-0 right-0 p-2 text-red-500 hover:text-red-700"
+        >
+          <FaTimes size={20} />
+        </button>
+        <h2 className="font-semibold text-xl md:text-2xl mb-4">
+          Vous n&apos;êtes pas autorisé à accéder aux ressources.
+        </h2>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full py-5 flex flex-col relative mb-96 bg-white">
@@ -120,11 +161,7 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
                 className="bg-gray-100 p-6 rounded-lg flex flex-col justify-between items-start shadow-md hover:shadow-lg transition-shadow duration-300"
               >
                 <Image
-                  src={
-                    imageUrl
-                      ? `${imageUrl}`
-                      : "/img/placeholder.webp"
-                  }
+                  src={imageUrl ? `${imageUrl}` : "/img/placeholder.webp"}
                   alt={resource.attributes.title}
                   className="w-full h-48 object-cover rounded-md"
                   width={500}
