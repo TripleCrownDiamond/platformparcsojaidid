@@ -115,22 +115,6 @@ const Resources: React.FC<ResourcesProps> = ({ setOpenResources }) => {
     }
   };
 
-  if (userData?.attributes?.active === false) {
-    return (
-      <div className="w-full py-5 flex flex-col relative mb-96 bg-white">
-        <button
-          onClick={handleClose}
-          className="absolute top-0 right-0 p-2 text-red-500 hover:text-red-700"
-        >
-          <FaTimes size={20} />
-        </button>
-        <h2 className="font-semibold text-xl md:text-2xl mb-4">
-          Vous n&apos;êtes pas autorisé à accéder aux ressources.
-        </h2>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full py-5 flex flex-col relative mb-96 bg-white">
       <button
